@@ -4,7 +4,6 @@ const { randomUUID } = require('crypto');
 const router = require('express').Router();
 
 router.post('/filmes', (req, res) => {
-    console.log(req.headers)
     const filme = req.body;
     const id = randomUUID();
     const filmes = JSON.parse(readFileSync('filmes.json'));
@@ -35,7 +34,7 @@ router.get('/filmes', (req, res) => {
     }
 
     if (nota) {
-        filmes = filmes.filter(filme => filme.nota >= nota);
+        filmes = filmes.filter(filme => Number(filme.nota) >= Number(nota));
     }
 
     res.status(200).json(filmes);
